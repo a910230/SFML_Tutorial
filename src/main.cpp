@@ -5,21 +5,17 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode({1920u, 1080u}), "Game-101");
     window.setFramerateLimit(144);
+    
+    sf::Texture warrior;
+    if (!warrior.loadFromFile("../../assets/character0.png")) {
+        cerr << "Error loading warrior texture!" << endl;
+        return 1;
+    }
+    sf::Font mingliu("../../assets/mingliu.ttc");
+    wstring name = L"你的名字";
 
-    // sf::Texture warrior("../../assets/character0.png");
-    // sf::Sprite warrior1(warrior);
-    // warrior1.setScale({0.25f, 0.25f});
-    // warrior1.setOrigin({warrior.getSize().x * 0.5f, warrior.getSize().y * 0.5f});
-    // warrior1.setPosition({window.getSize().x * 0.5f, window.getSize().y * 0.5f});
-    // warrior1.scale({-1.f, 1.f});
-    Character player;
+    Character player(warrior, mingliu, name);
     player.setPosition({window.getSize().x * 0.5f, window.getSize().y * 0.5f});
-
-    // sf::Font mingliu("../../assets/mingliu.ttc");
-    // sf::Text name(mingliu);
-    // name.setString(L"你的名字");
-    // name.setCharacterSize(24);
-    // name.setFillColor(sf::Color::Red);
 
     while (window.isOpen())
     {
@@ -30,13 +26,16 @@ int main()
                 window.close();
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)) {
-                warrior1.move({1.f, 0.f});
+                player.moveRight();
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)) {
+                player.moveLeft();
             }
         }
 
         window.clear(sf::Color::White);
-        window.draw(warrior1);
-        window.draw(name);
+        window.draw(player);
+        // window.draw(name);
         window.display();
     }
 }
