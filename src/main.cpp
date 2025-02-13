@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "character.cpp"
+#include "terrain.cpp"
 
 int main()
 {
@@ -12,9 +13,10 @@ int main()
         return 1;
     }
     sf::Font mingliu("../../assets/mingliu.ttc");
-    wstring name = L"你的名字";
+    wstring name = L"哆哆哆大王";
 
     Character player(warrior, mingliu, name);
+    player.scale({0.75f, 0.75f});
     player.setPosition({window.getSize().x * 0.5f, window.getSize().y * 0.5f});
 
     while (window.isOpen())
@@ -35,7 +37,10 @@ int main()
 
         window.clear(sf::Color::White);
         window.draw(player);
-        // window.draw(name);
+
+        Terrain terrain;
+        terrain.draw(window);
+
         window.display();
     }
 }

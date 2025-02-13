@@ -15,6 +15,7 @@ FetchContent_MakeAvailable(SFML)
 add_executable(game101
     src/main.cpp
     src/character.cpp
+    src/terrain.cpp
 )
 target_compile_features(game101 PRIVATE cxx_std_17)
 target_link_libraries(game101 PRIVATE SFML::Graphics)
