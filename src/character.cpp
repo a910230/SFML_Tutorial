@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 using namespace std;
 
-class Character: 
+class Character:
     public sf::Drawable,
     public sf::Transformable {
 public:

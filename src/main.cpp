@@ -19,6 +19,14 @@ int main()
     player.scale({0.75f, 0.75f});
     player.setPosition({window.getSize().x * 0.5f, window.getSize().y * 0.5f});
 
+    sf::Texture grassTexture;
+    if (!grassTexture.loadFromFile("../../assets/useful.png")) {
+        cerr << "Error loading grass texture!" << endl;
+        return 1;
+    }
+
+    Terrain terrain(grassTexture);
+
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())
@@ -37,9 +45,7 @@ int main()
 
         window.clear(sf::Color::White);
         window.draw(player);
-
-        Terrain terrain;
-        terrain.draw(window);
+        window.draw(terrain);
 
         window.display();
     }
