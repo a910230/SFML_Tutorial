@@ -38,12 +38,12 @@ void Character::moveLeft() {
     }
 }
 
-bool Character::isAttachedTo(Terrain& terrain) {
-    return terrain.isOn(boundingCenter);
+bool Character::isAttachedTo(Terrain& terrain, sf::Text& debug_log) {
+    return terrain.isOn(boundingCenter, debug_log);
 }
 
-void Character::fall(Terrain& terrain) { // Should be modified to take Map as input
-    if (!isAttachedTo(terrain)) {
+void Character::fall(Terrain& terrain, sf::Text& debug_log) { // Should be modified to take Map as input
+    if (!isAttachedTo(terrain, debug_log)) {
         move({0.f, 1.f});
     }
     // TODO: Move the character to exactly attach to the terrain

@@ -10,8 +10,8 @@ public:
     Character(const sf::Texture& texture, const sf::Font& font, wstring char_name);
     void moveRight();
     void moveLeft();
-    bool isAttachedTo(Terrain& terrain);
-    void fall(Terrain& terrain);
+    bool isAttachedTo(Terrain& terrain, sf::Text& debug_log);
+    void fall(Terrain& terrain, sf::Text& debug_log);
 
 protected:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

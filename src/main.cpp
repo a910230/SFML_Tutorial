@@ -29,6 +29,11 @@ int main()
     
     Terrain terrain(grassTexture, vector<sf::Vector2f>{{300.f, 800.f}, {800.f, 800.f}, {1300.f, 600.f}, {1600.f, 600.f}});
 
+    sf::Text debug_log(mingliu);
+    debug_log.setFillColor(sf::Color::Blue);
+    debug_log.setPosition({window.getSize().x - 300, 0});
+    debug_log.setString("");
+
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())
@@ -45,11 +50,12 @@ int main()
             }
         }
 
-        player.fall(terrain);
+        player.fall(terrain, debug_log);
 
         window.clear(sf::Color::White);
         window.draw(terrain);
         window.draw(player);
+        window.draw(debug_log);
 
         window.display();
     }

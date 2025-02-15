@@ -8,7 +8,7 @@ class Terrain:
 public:
     Terrain(const sf::Texture& terrain_texture);
     Terrain(const sf::Texture& terrain_texture, vector<sf::Vector2f> corners);
-    bool isOn(sf::Vector2f v);
+    bool isOn(sf::Vector2f v, sf::Text& debug_log);
     void fillBottom(sf::RenderWindow& window);
 
 protected:

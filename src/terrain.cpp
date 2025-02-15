@@ -1,4 +1,5 @@
 #include <iostream>
+#include <format>
 #include <SFML/Graphics.hpp>
 #include "math.hpp"
 #include "terrain.hpp"
@@ -25,13 +26,14 @@ Terrain::Terrain(const sf::Texture& terrain_texture, vector<sf::Vector2f> corner
     }
 }
 
-bool Terrain::isOn(sf::Vector2f v) {
+bool Terrain::isOn(sf::Vector2f v, sf::Text& debug_log) {
     int i = 0;
     while (bounding[i].position.x < v.x) {
         ++i;
     }
     if (i == 0) return false;
     sf::Vector2f boundingPoint = interpolate(bounding[i - 1].position, bounding[i].position, v.x);
+    debug_log.setString(format("v.y: {}, boundingPoint.y: {}", v.y, boundingPoint.y));
     return (abs(v.y - boundingPoint.y) <= 1.f);
 }
 
