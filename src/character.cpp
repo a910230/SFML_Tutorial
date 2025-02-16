@@ -5,20 +5,21 @@
 using namespace std;
 
 Character::Character(const sf::Texture& texture, const sf::Font& font, wstring char_name): character(texture), name(font) {
-    character.setScale({0.25f, 0.25f});
-    sf::Vector2f center = character.getLocalBounds().getCenter();
-    center -= {68.f, 0.f};
-    character.setOrigin(center);
+    // character.setScale({0.25f, 0.25f});
+    // sf::Vector2f center = character.getLocalBounds().getCenter();
+    // center -= {68.f, 0.f};
+    // character.setOrigin(center);
 
-    defHelperShape();
+    // defHelperShape();
 
-    name.setString(char_name);
-    name.setCharacterSize(24);
-    name.setFillColor(sf::Color::Red);
-    name.setOrigin(name.getLocalBounds().getCenter());
-    name.setPosition(character.getPosition() + sf::Vector2f{0.f, 120.f});
+    // name.setString(char_name);
+    // name.setCharacterSize(24);
+    // name.setFillColor(sf::Color::Red);
+    // name.setOrigin(name.getLocalBounds().getCenter());
+    // name.setPosition(character.getPosition() + sf::Vector2f{0.f, 120.f});
 
     faceRight = true;
+    children.append("nameBox", NameBox(char_name));
 }
 
 void Character::moveRight() {
