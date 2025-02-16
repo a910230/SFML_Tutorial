@@ -1,20 +1,17 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "terrain.hpp"
+#include "object.hpp"
+// #include "terrain.hpp"
 using namespace std;
 
 class Character:
-    public sf::Drawable,
-    public sf::Transformable {
+    public Object {
 public:
     Character(const sf::Texture& texture, const sf::Font& font, wstring char_name);
     void moveRight();
     void moveLeft();
-    bool isAttachedTo(Terrain& terrain, sf::Text& debug_log);
-    void fall(Terrain& terrain, sf::Text& debug_log);
-
-protected:
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+    bool isAttachedTo(Terrain& terrain);
+    void fall(Terrain& terrain);
 
 private:
     sf::Sprite character;
