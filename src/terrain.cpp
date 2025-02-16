@@ -33,7 +33,12 @@ bool Terrain::isOn(sf::Vector2f v, sf::Text& debug_log) {
     }
     if (i == 0) return false;
     sf::Vector2f boundingPoint = interpolate(bounding[i - 1].position, bounding[i].position, v.x);
-    debug_log.setString(format("v.y: {}, boundingPoint.y: {}", v.y, boundingPoint.y));
+    string s = format("Character: x = {}, y = {}\n", v.x, v.y);
+    for (int i = 0; i < bounding.getVertexCount(); ++i) {
+        s += format("x = {}, y = {}\n", bounding[i].position.x, bounding[i].position.y);
+    }
+    s += format("v.y: {}, boundingPoint.y: {}", v.y, boundingPoint.y);
+    debug_log.setString(s);
     return (abs(v.y - boundingPoint.y) <= 1.f);
 }
 

@@ -31,8 +31,12 @@ int main()
 
     sf::Text debug_log(mingliu);
     debug_log.setFillColor(sf::Color::Blue);
-    debug_log.setPosition({window.getSize().x - 300, 0});
-    debug_log.setString("");
+    debug_log.setPosition({window.getSize().x - 600, 0});
+    debug_log.setString(format("x = {}, y = {}", player.getPosition().x, player.getPosition().y));
+
+    sf::Text mouse_pos(mingliu);
+    mouse_pos.setFillColor(sf::Color::Blue);
+    mouse_pos.setPosition({0, 0});
 
     while (window.isOpen())
     {
@@ -50,12 +54,14 @@ int main()
             }
         }
 
+        mouse_pos.setString(format("x = {}, y = {}", sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
         player.fall(terrain, debug_log);
 
         window.clear(sf::Color::White);
         window.draw(terrain);
         window.draw(player);
         window.draw(debug_log);
+        window.draw(mouse_pos);
 
         window.display();
     }

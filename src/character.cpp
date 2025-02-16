@@ -39,7 +39,7 @@ void Character::moveLeft() {
 }
 
 bool Character::isAttachedTo(Terrain& terrain, sf::Text& debug_log) {
-    return terrain.isOn(boundingCenter, debug_log);
+    return terrain.isOn(getPosition() + boundingCenterDot.getPosition(), debug_log);
 }
 
 void Character::fall(Terrain& terrain, sf::Text& debug_log) { // Should be modified to take Map as input

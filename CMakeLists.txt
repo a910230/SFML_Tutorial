@@ -16,9 +16,10 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 
 add_executable(game101
     src/main.cpp
+    src/object.cpp
     src/character.cpp
     src/terrain.cpp
     src/math.cpp
 )
-target_compile_features(game101 PRIVATE cxx_std_17)
+target_compile_features(game101 PRIVATE cxx_std_20)
 target_link_libraries(game101 PRIVATE SFML::Graphics)
