@@ -9,13 +9,13 @@ CharacterAndName::CharacterAndName(const sf::Texture& texture, wstring char_name
     
 
     faceRight = true;
-    appendChild(NameTag(char_name, font), "nameBox");
-    appendChild(Character(texture), "character");
+    appendChild(new NameTag(char_name, font), "nameBox");
+    appendChild(new Character(texture), "character");
 }
 
 void CharacterAndName::moveRight() {
     if (!faceRight) {
-        static_cast<Character&>(getChild("character")).flip();
+        dynamic_cast<Character*>(getChild("character"))->flip();
     }
     else {
         move({1.f, 0.f});
@@ -23,7 +23,7 @@ void CharacterAndName::moveRight() {
 }
 void CharacterAndName::moveLeft() {
     if (faceRight) {
-        static_cast<Character&>(getChild("character")).flip();
+        dynamic_cast<Character*>(getChild("character"))->flip();
     }
     else {
         move({-1.f, 0.f});

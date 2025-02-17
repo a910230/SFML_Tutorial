@@ -1,8 +1,5 @@
 #include "character.hpp"
 
-#include <iostream>
-using namespace std;
-
 Character::Character(const sf::Texture& texture):character(texture) {
     character.setScale({0.25f, 0.25f});
     // sf::Vector2f center = character.getLocalBounds().getCenter();
@@ -19,7 +16,6 @@ void Character::flip() {
 }
 
 void Character::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    cout << "Character draw" << endl;
     Object::draw(target, states);
 
     states.transform *= getTransform();

@@ -58,8 +58,7 @@ int main()
         // player.fall();
 
         window.clear(sf::Color::White);
-        // window.draw(terrain);
-        cout << "to draw player" << endl;
+        window.draw(terrain);
         window.draw(player);
         // window.draw(debug_log);
         // window.draw(mouse_pos);
