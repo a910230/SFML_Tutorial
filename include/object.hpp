@@ -7,12 +7,13 @@ class Object:
     public sf::Transformable {
 public:
     Object();
-    bool append(Object& child, string name);
-    bool remove(string name);
+    bool appendChild(Object child, string name);
+    bool removeChild(string name);
+    Object& getChild(string name);
 
 protected:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 private:
-    unordered_map<string, Object> children;
+    unordered_map<string, Object*> children;
 };

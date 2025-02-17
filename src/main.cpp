@@ -1,6 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "character.hpp"
+#include "character_and_name.hpp"
 #include "terrain.hpp"
 using namespace std;
 
@@ -17,8 +17,8 @@ int main()
     sf::Font mingliu("../../assets/mingliu.ttc");
     wstring name = L"哆哆哆大王";
 
-    Character player(warrior, mingliu, name);
-    player.scale({0.75f, 0.75f});
+    CharacterAndName player(warrior, name, mingliu);
+    // player.scale({0.75f, 0.75f});
     player.setPosition({window.getSize().x * 0.5f, window.getSize().y * 0.5f});
 
     sf::Texture grassTexture;
@@ -55,13 +55,14 @@ int main()
         }
 
         mouse_pos.setString(format("x = {}, y = {}", sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
-        player.fall(terrain, debug_log);
+        // player.fall();
 
         window.clear(sf::Color::White);
-        window.draw(terrain);
+        // window.draw(terrain);
+        cout << "to draw player" << endl;
         window.draw(player);
-        window.draw(debug_log);
-        window.draw(mouse_pos);
+        // window.draw(debug_log);
+        // window.draw(mouse_pos);
 
         window.display();
     }

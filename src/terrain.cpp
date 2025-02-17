@@ -42,8 +42,6 @@ bool Terrain::isOn(sf::Vector2f v, sf::Text& debug_log) {
     return (abs(v.y - boundingPoint.y) <= 1.f);
 }
 
-void Terrain::fillBottom(sf::RenderWindow& window) {}
-
 void Terrain::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     states.transform *= getTransform();  // Apply transformations from the parent (position, scale, rotation)
     
