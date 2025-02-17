@@ -17,6 +17,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 add_executable(game101
     src/main.cpp
     src/object.cpp
+    src/children.cpp
     src/character_and_name.cpp
     src/name_tag.cpp
     src/character.cpp

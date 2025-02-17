@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "children.hpp"
 using namespace std;
 
 class Object:
@@ -15,5 +16,5 @@ protected:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 private:
-    unordered_map<string, Object*> children;
+    Children children;
 };
