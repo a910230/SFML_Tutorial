@@ -60,8 +60,8 @@ int main()
         window.clear(sf::Color::White);
         window.draw(terrain);
         window.draw(player);
-        // window.draw(debug_log);
-        // window.draw(mouse_pos);
+        window.draw(debug_log);
+        window.draw(mouse_pos);
 
         window.display();
     }

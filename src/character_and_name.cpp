@@ -3,18 +3,19 @@
 #include "character_and_name.hpp"
 #include "name_tag.hpp"
 #include "character.hpp"
+#include "bounding_box.hpp"
 using namespace std;
 
 CharacterAndName::CharacterAndName(const sf::Texture& texture, wstring char_name, const sf::Font& font): attachedTerrain(nullptr) {
-    
-
     faceRight = true;
-    appendChild(new NameTag(char_name, font), "nameBox");
+    appendChild(new NameTag(char_name, font), "nameTag");
     appendChild(new Character(texture), "character");
+    appendChild(new BoundingBox({104.75, 153.5}, {4.5f, -24.f}), "boundingBox");
 }
 
 void CharacterAndName::moveRight() {
     if (!faceRight) {
+        faceRight = true;
         dynamic_cast<Character*>(getChild("character"))->flip();
     }
     else {
@@ -23,6 +24,7 @@ void CharacterAndName::moveRight() {
 }
 void CharacterAndName::moveLeft() {
     if (faceRight) {
+        faceRight = false;
         dynamic_cast<Character*>(getChild("character"))->flip();
     }
     else {

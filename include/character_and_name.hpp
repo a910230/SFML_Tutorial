@@ -18,7 +18,6 @@ private:
     // sf::Sprite character;
     // sf::Text name;
     // sf::CircleShape centerDot;
-    // sf::RectangleShape boundingBox;
     // sf::Vector2f boundingBoxShiftX;
     // sf::Vector2f boundingBoxShiftY;
     // sf::Vector2f boundingCenter;
