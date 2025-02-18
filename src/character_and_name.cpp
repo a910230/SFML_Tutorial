@@ -10,7 +10,8 @@ CharacterAndName::CharacterAndName(const sf::Texture& texture, wstring char_name
     faceRight = true;
     appendChild(new NameTag(char_name, font), "nameTag");
     appendChild(new Character(texture), "character");
-    appendChild(new BoundingBox({104.75, 153.5}, {4.5f, -24.f}), "boundingBox");
+    appendChild(new BoundingBox({105.f, 153.5f}, {0.f, -24.f}), "boundingBox");
+    // appendChild(new BoundingBox({104.75, 153.5}, {4.5f, -24.f}), "boundingBox");
 }
 
 void CharacterAndName::moveRight() {
