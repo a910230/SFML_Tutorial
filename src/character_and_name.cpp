@@ -4,9 +4,10 @@
 #include "name_tag.hpp"
 #include "character.hpp"
 #include "bounding_box.hpp"
+#include "map.hpp"
 using namespace std;
 
-CharacterAndName::CharacterAndName(const sf::Texture& texture, wstring char_name, const sf::Font& font): attachedTerrain(nullptr) {
+CharacterAndName::CharacterAndName(Map& map, const sf::Texture& texture, wstring char_name, const sf::Font& font): map(map), attachedTerrain(nullptr) {
     faceRight = true;
     appendChild(new NameTag(char_name, font), "nameTag");
     appendChild(new Character(texture), "character");
@@ -44,6 +45,12 @@ bool CharacterAndName::isAttachedToTerrain() {
 void CharacterAndName::fall() { // Should be modified to take Map as input
     if (!isAttachedToTerrain()) {
         move({0.f, 1.f});
+        // Check if the character is touching any terrain in the map
+        if (map.isOnTerrain(getPosition())) {
+            // Move the character to exactly attach to the terrain
+            attachedTerrain = map.getTerrain(getPosition());
+            setPosition(attachedTerrain->getOnTerrainPosition(getPosition()));
+        }
     }
     // TODO: Move the character to exactly attach to the terrain
 }

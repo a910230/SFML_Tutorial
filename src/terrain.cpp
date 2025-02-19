@@ -26,7 +26,7 @@ Terrain::Terrain(const sf::Texture& terrain_texture, vector<sf::Vector2f> corner
     }
 }
 
-bool Terrain::isOn(sf::Vector2f v, sf::Text& debug_log) {
+bool Terrain::isOn(sf::Vector2f v) {
     int i = 0;
     while (bounding[i].position.x < v.x) {
         ++i;
@@ -38,7 +38,6 @@ bool Terrain::isOn(sf::Vector2f v, sf::Text& debug_log) {
         s += format("x = {}, y = {}\n", bounding[i].position.x, bounding[i].position.y);
     }
     s += format("v.y: {}, boundingPoint.y: {}", v.y, boundingPoint.y);
-    debug_log.setString(s);
     return (abs(v.y - boundingPoint.y) <= 1.f);
 }
 
@@ -49,4 +48,14 @@ void Terrain::draw(sf::RenderTarget& target, sf::RenderStates states) const {
         target.draw(t, states);
     }
     target.draw(bounding, states);
+}
+
+sf::Vector2f Terrain::getOnTerrainPosition(sf::Vector2f v) {
+    int i = 0;
+    while (bounding[i].position.x < v.x) {
+        ++i;
+    }
+    if (i == 0) return v;
+    sf::Vector2f boundingPoint = interpolate(bounding[i - 1].position, bounding[i].position, v.x);
+    return {v.x, boundingPoint.y};
 }

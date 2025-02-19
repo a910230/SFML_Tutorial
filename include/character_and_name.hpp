@@ -2,12 +2,15 @@
 #include <SFML/Graphics.hpp>
 #include "object.hpp"
 #include "terrain.hpp"
+// #include "map.hpp"
 using namespace std;
+
+class Map;
 
 class CharacterAndName:
     public Object {
 public:
-    CharacterAndName(const sf::Texture& texture, wstring char_name, const sf::Font& font);
+    CharacterAndName(Map& map, const sf::Texture& texture, wstring char_name, const sf::Font& font);
     void moveRight();
     void moveLeft();
     // bool isAttachedTo(Terrain& terrain);
@@ -23,6 +26,7 @@ private:
     // sf::Vector2f boundingCenter;
     // sf::CircleShape boundingCenterDot;
     bool faceRight;
+    Map& map;
     Terrain* attachedTerrain;
 
     // void flip();

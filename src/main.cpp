@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "character_and_name.hpp"
 #include "terrain.hpp"
+#include "map.hpp"
 using namespace std;
 
 int main()
@@ -16,23 +17,27 @@ int main()
     }
     sf::Font mingliu("../../assets/mingliu.ttc");
     wstring name = L"哆哆哆大王";
-
-    CharacterAndName player(warrior, name, mingliu);
-    // player.scale({0.75f, 0.75f});
-    player.setPosition({window.getSize().x * 0.5f, window.getSize().y * 0.5f});
-
     sf::Texture grassTexture;
     if (!grassTexture.loadFromFile("../../assets/grass.png")) {
         cerr << "Error loading grass texture!" << endl;
         return 1;
     }
-    
-    Terrain terrain(grassTexture, vector<sf::Vector2f>{{300.f, 800.f}, {800.f, 800.f}, {1300.f, 600.f}, {1600.f, 600.f}});
+
+    Map map;
+
+    vector<sf::Vector2f> terrainPositions = {{300.f, 800.f}, {800.f, 800.f}, {1300.f, 600.f}, {1600.f, 600.f}};
+    Terrain* terrain = new Terrain(grassTexture, terrainPositions);
+    map.appendTerrain(terrain, "terrain1");
+
+    CharacterAndName* player = new CharacterAndName(map, warrior, name, mingliu);
+    player->setPosition({window.getSize().x * 0.5f, window.getSize().y * 0.5f});
+    map.appendCharacter(player, "player");
+
 
     sf::Text debug_log(mingliu);
     debug_log.setFillColor(sf::Color::Blue);
     debug_log.setPosition({window.getSize().x - 600, 0});
-    debug_log.setString(format("x = {}, y = {}", player.getPosition().x, player.getPosition().y));
+    debug_log.setString(format("x = {}, y = {}", player->getPosition().x, player->getPosition().y));
 
     sf::Text mouse_pos(mingliu);
     mouse_pos.setFillColor(sf::Color::Blue);
@@ -40,26 +45,30 @@ int main()
 
     while (window.isOpen())
     {
-        while (const std::optional event = window.pollEvent())
+        while (const optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
             {
                 window.close();
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)) {
-                player.moveRight();
+                player->moveRight();
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)) {
-                player.moveLeft();
+                player->moveLeft();
             }
         }
 
         mouse_pos.setString(format("x = {}, y = {}", sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
-        player.fall();
+        player->fall();
 
         window.clear(sf::Color::White);
-        window.draw(terrain);
-        window.draw(player);
+        for (const auto& pair: map.getTerrains()) {
+            window.draw(*pair.second);
+        }
+        for (const auto& pair: map.getCharacters()) {
+            window.draw(*pair.second);
+        }
         window.draw(debug_log);
         window.draw(mouse_pos);
 

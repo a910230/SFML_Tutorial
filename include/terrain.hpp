@@ -9,7 +9,8 @@ public:
     Terrain();
     Terrain(const sf::Texture& terrain_texture);
     Terrain(const sf::Texture& terrain_texture, vector<sf::Vector2f> corners);
-    bool isOn(sf::Vector2f v, sf::Text& debug_log);
+    bool isOn(sf::Vector2f v);
+    sf::Vector2f getOnTerrainPosition(sf::Vector2f v);
     
 protected:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

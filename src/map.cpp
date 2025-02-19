@@ -14,7 +14,7 @@ bool Map::removeTerrain(size_t id) {
     return terrains.remove(id);
 }
         
-size_t Map::appendCharacter(Character* character, string name) {
+size_t Map::appendCharacter(CharacterAndName* character, string name) {
     return characters.append(character, name);
 }
         
@@ -24,4 +24,30 @@ bool Map::removeCharacter(string name) {
         
 bool Map::removeCharacter(size_t id) {
     return characters.remove(id);
+}
+
+bool Map::isOnTerrain(sf::Vector2f position) {
+    for (auto& pair: terrains) {
+        if (dynamic_cast<Terrain*>(pair.second)->isOn(position)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+Terrain* Map::getTerrain(sf::Vector2f position) {
+    for (auto& pair: terrains) {
+        if (dynamic_cast<Terrain*>(pair.second)->isOn(position)) {
+            return dynamic_cast<Terrain*>(pair.second);
+        }
+    }
+    return nullptr;
+}
+
+Children Map::getCharacters() {
+    return characters;
+}
+
+Children Map::getTerrains() {
+    return terrains;
 }

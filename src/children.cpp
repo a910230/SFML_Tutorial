@@ -63,3 +63,27 @@ const Object* Children::operator[] (size_t idx) const {
 size_t Children::size() const {
     return children.size();
 }
+
+Children::iterator Children::begin() {
+    return children.begin();
+}
+
+Children::iterator Children::end() {
+    return children.end();
+}
+
+Children::const_iterator Children::begin() const {
+    return children.begin();
+}
+
+Children::const_iterator Children::end() const {
+    return children.end();
+}
+
+Children::const_iterator Children::cbegin() const {
+    return children.cbegin();
+}
+
+Children::const_iterator Children::cend() const {
+    return children.cend();
+}

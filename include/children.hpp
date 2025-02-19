@@ -18,6 +18,15 @@ public:
     const Object* operator[] (size_t idx) const;
     size_t size() const;
 
+    using iterator = vector<pair<string, Object*>>::iterator;
+    using const_iterator = vector<pair<string, Object*>>::const_iterator;
+    iterator begin();
+    iterator end();
+    const_iterator begin() const;
+    const_iterator end() const;
+    const_iterator cbegin() const;
+    const_iterator cend() const;
+
 private:
     vector<pair<string, Object*>> children;
     unordered_map<string, size_t> keyToIndex;
