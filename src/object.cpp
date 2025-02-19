@@ -2,7 +2,7 @@
 
 Object::Object() {}
 
-bool Object::appendChild(Object* child, string name) {
+size_t Object::appendChild(Object* child, string name) {
     return children.append(child, name);
 }
 

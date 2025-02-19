@@ -38,7 +38,7 @@ void CharacterAndName::moveLeft() {
 // }
 
 bool CharacterAndName::isAttachedToTerrain() {
-    return !attachedTerrain;
+    return (attachedTerrain != nullptr);
 }
 
 void CharacterAndName::fall() { // Should be modified to take Map as input

@@ -8,7 +8,7 @@ class Object:
     public sf::Transformable {
 public:
     Object();
-    bool appendChild(Object* child, string name);
+    size_t appendChild(Object* child, string name);
     bool removeChild(string name);
     Object* getChild(string name);
 

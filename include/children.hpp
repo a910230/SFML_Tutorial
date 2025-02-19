@@ -8,7 +8,7 @@ class Object;
 
 class Children {
 public:
-    bool append(Object* child, string name);
+    size_t append(Object* child, string name);
     bool insert(Object* child, string name, size_t idx);
     bool remove(string name);
     bool remove(size_t idx);

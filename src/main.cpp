@@ -55,7 +55,7 @@ int main()
         }
 
         mouse_pos.setString(format("x = {}, y = {}", sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
-        // player.fall();
+        player.fall();
 
         window.clear(sf::Color::White);
         window.draw(terrain);

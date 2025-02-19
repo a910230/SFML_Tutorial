@@ -22,6 +22,7 @@ add_executable(game101
     src/name_tag.cpp
     src/character.cpp
     src/bounding_box.cpp
+    src/map.cpp
     src/terrain.cpp
     src/math.cpp
 )

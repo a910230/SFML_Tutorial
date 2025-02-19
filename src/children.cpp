@@ -2,11 +2,11 @@
 #include "object.hpp"
 using namespace std;
 
-bool Children::append(Object* child, string name) {
+size_t Children::append(Object* child, string name) {
     bool done = keyToIndex.insert({name, children.size()}).second;
-    if (!done) return false;
+    if (!done) return -1;
     children.push_back({name, child});
-    return true;
+    return children.size() - 1;
 }
 
 bool Children::insert(Object* child, string name, size_t idx) {
