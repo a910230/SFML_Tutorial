@@ -5,6 +5,7 @@
 #include "character.hpp"
 #include "bounding_box.hpp"
 #include "map.hpp"
+#include "attaching_pivot.hpp"
 using namespace std;
 
 CharacterAndName::CharacterAndName(Map& map, const sf::Texture& texture, wstring char_name, const sf::Font& font): map(map), attachedTerrain(nullptr) {
@@ -12,7 +13,10 @@ CharacterAndName::CharacterAndName(Map& map, const sf::Texture& texture, wstring
     appendChild(new NameTag(char_name, font), "nameTag");
     appendChild(new Character(texture), "character");
     appendChild(new BoundingBox({105.f, 153.5f}, {0.f, -24.f}), "boundingBox");
-    // appendChild(new BoundingBox({104.75, 153.5}, {4.5f, -24.f}), "boundingBox");
+    // Calculate the position for the AttachingPivot
+    BoundingBox* boundingBox = dynamic_cast<BoundingBox*>(getChild("boundingBox"));
+    sf::Vector2f attachingPivotPosition = {0.f, 24.f + boundingBox->getSize().y / 2};
+    appendChild(new AttachingPivot(attachingPivotPosition), "attachingPivot");
 }
 
 void CharacterAndName::moveRight() {
@@ -42,17 +46,26 @@ bool CharacterAndName::isAttachedToTerrain() {
     return (attachedTerrain != nullptr);
 }
 
-void CharacterAndName::fall() { // Should be modified to take Map as input
+void CharacterAndName::fall() {
     if (!isAttachedToTerrain()) {
         move({0.f, 1.f});
-        // Check if the character is touching any terrain in the map
-        if (map.isOnTerrain(getPosition())) {
-            // Move the character to exactly attach to the terrain
-            attachedTerrain = map.getTerrain(getPosition());
-            setPosition(attachedTerrain->getOnTerrainPosition(getPosition()));
-        }
+        attachToTerrain();
     }
-    // TODO: Move the character to exactly attach to the terrain
+}
+
+void CharacterAndName::attachToTerrain() {
+    // Check if the character is touching any terrain in the map
+    if (map.isOnTerrain(getAttachingPosition())) {
+        // Move the character to exactly attach to the terrain
+        attachedTerrain = map.getTerrain(getAttachingPosition());
+        setPosition(attachedTerrain->getOnTerrainPosition(getAttachingPosition()) - dynamic_cast<AttachingPivot*>(getChild("attachingPivot"))->getPosition());
+    }
+}
+
+sf::Vector2f CharacterAndName::getAttachingPosition() {
+    cout << "getPosition() = " << getPosition().x << ", " << getPosition().y << endl;
+    cout << "attachingPivot->getPosition() = " << dynamic_cast<AttachingPivot*>(getChild("attachingPivot"))->getPosition().x << ", " << dynamic_cast<AttachingPivot*>(getChild("attachingPivot"))->getPosition().y << endl;
+    return getPosition() + dynamic_cast<AttachingPivot*>(getChild("attachingPivot"))->getPosition();
 }
 
 // void Character::draw(sf::RenderTarget& target, sf::RenderStates states) const {

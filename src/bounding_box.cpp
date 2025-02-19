@@ -15,3 +15,7 @@ void BoundingBox::draw(sf::RenderTarget& target, sf::RenderStates states) const 
     states.transform *= getTransform();
     target.draw(boundingBox, states);
 }
+
+sf::Vector2f BoundingBox::getSize() const {
+    return boundingBox.getSize();
+}

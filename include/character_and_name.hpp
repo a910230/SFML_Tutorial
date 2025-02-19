@@ -16,6 +16,7 @@ public:
     // bool isAttachedTo(Terrain& terrain);
     bool isAttachedToTerrain();
     void fall();
+    sf::Vector2f getAttachingPosition();
 
 private:
     // sf::Sprite character;
@@ -24,10 +25,10 @@ private:
     // sf::Vector2f boundingBoxShiftX;
     // sf::Vector2f boundingBoxShiftY;
     // sf::Vector2f boundingCenter;
-    // sf::CircleShape boundingCenterDot;
     bool faceRight;
     Map& map;
     Terrain* attachedTerrain;
+    void attachToTerrain();
 
     // void flip();
     // void defHelperShape();
